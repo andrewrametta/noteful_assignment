@@ -76,7 +76,7 @@ class AddFolder extends React.Component {
             aria-label="Folder Name"
           />
 
-          <button type="submit" disabled={this.validateName()}>
+          <button type="submit-button" disabled={this.validateName()}>
             Submit
           </button>
           <ValidationError message={nameError} />

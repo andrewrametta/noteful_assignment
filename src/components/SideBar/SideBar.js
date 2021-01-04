@@ -50,6 +50,7 @@ class SideBar extends React.Component {
 
 SideBar.defaultProps = {
   folders: [],
+  notes: [],
 };
 
 export default SideBar;
