@@ -1,0 +1,33 @@
+.SideBar_list {
+  margin-top: 110px;
+}
+
+.SideBar li {
+  list-style: none;
+  margin: 10px;
+  padding-top: 10px;
+  font-size: 30px;
+}
+
+.NoteListNav_folder-link {
+  text-decoration: none;
+}
+
+.addFolder-button {
+  color: white;
+  background-color: blueviolet;
+  border: none;
+  text-decoration: none;
+  padding: 5px 10px;
+  display: inline-block;
+  cursor: pointer;
+  margin-left: 50px;
+  margin-top: 30px;
+}
+
+.NoteListNav_num-notes {
+  text-align: right;
+  text-decoration: none;
+  font-size: 18px;
+  margin-right: 20px;
+}

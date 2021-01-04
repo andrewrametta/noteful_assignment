@@ -1,3 +1,10 @@
-import React from 'react'
+import React from "react";
 
-export default React.createContext ();
+const Context = React.createContext({
+  NOTES: {},
+  deleteNote: () => {},
+  addFolder: () => {},
+  addNote: () => {},
+});
+
+export default Context;

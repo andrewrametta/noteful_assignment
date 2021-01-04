@@ -1,0 +1,36 @@
+.NoteContent {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid black;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+.noteContent-title {
+  flex: 4;
+  text-align: left;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  max-width: 90%;
+}
+
+.noteContent-title a {
+  display: block;
+}
+
+.noteContent-delete-button {
+  flex: 1;
+  color: white;
+  background-color: blueviolet;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  height: 10%;
+}
+
+.noteContent-modified {
+  flex: 2;
+  bottom: 10px;
+  font-size: 10px;
+  text-align: right;
+}

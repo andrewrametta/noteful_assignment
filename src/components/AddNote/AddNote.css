@@ -1,0 +1,48 @@
+* {
+  box-sizing: border-box;
+}
+
+.AddNote h2 {
+  color: darkblue;
+  font-size: 36px;
+}
+
+.AddNote_form {
+  color: darkblue;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.AddNote-name {
+  flex: 1;
+  font-size: 18px;
+}
+
+.AddNote {
+  margin-bottom: 20px;
+  color: darkblue;
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-name {
+  flex: 1;
+}
+
+input {
+  margin-top: 30px;
+}
+
+select {
+  margin-top: 20px;
+}
+
+label {
+  font-size: 18px;
+}
+
+.AddNote-button-container {
+  margin-top: 20px;
+}

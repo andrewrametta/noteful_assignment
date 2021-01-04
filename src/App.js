@@ -1,24 +1,24 @@
-import React, { Component } from "react";
-import config from "./config";
-import Context from "./Context";
-import NotePageNav from "./components/NotePageNav/NotePageNav";
-import NoteListNav from "./components/NoteListNav/NoteListNav";
-import NoteListMain from "./components/NoteListMain/NoteListMain";
-import NotePageMain from "./components/NotePageMain/NotePageMain";
-import "./App.css";
+import React from "react";
 import { Route, Link } from "react-router-dom";
+import Main from "./components/Main/Main";
+import SideBar from "./components/SideBar/SideBar";
+import NotePageSideBar from "./components/NotePageSideBar/NotePageSideBar";
+import Note from "./components/Note/Note";
+import Context from "./Context";
+import AddFolder from "./components/AddFolder/AddFolder";
+import AddNote from "./components/AddNote/AddNote";
+import "./App.css";
 
-class App extends Component {
-  static contextType = Context;
+class App extends React.Component {
   state = {
     notes: [],
     folders: [],
   };
-  // fetch note api when page renders
+
   componentDidMount() {
     Promise.all([
-      fetch(`${config.API_ENDPOINT}/notes`),
-      fetch(`${config.API_ENDPOINT}/folders`),
+      fetch("http://localhost:9090/notes"),
+      fetch("http://localhost:9090/folders"),
     ])
       .then(([notesRes, foldersRes]) => {
         if (!notesRes.ok) return notesRes.json().then((e) => Promise.reject(e));
@@ -28,53 +28,86 @@ class App extends Component {
         return Promise.all([notesRes.json(), foldersRes.json()]);
       })
       .then(([notes, folders]) => {
-        this.setState({ notes, folders });
+        this.setState({
+          notes,
+          folders,
+        });
       })
-      .catch((error) => console.error({ error }));
+      .catch((error) => {
+        console.error({ error });
+      });
   }
-  // delete note
+
   handleDeleteNote = (noteId) => {
     this.setState({
-      note: this.state.notes.filter((note) => note.id !== noteId),
+      notes: this.state.notes.filter((note) => noteId !== note.id),
     });
   };
 
-  // render nav routes
-  renderNavRoutes() {
+  handleAddFolder = (folderName) => {
+    console.log(folderName);
+    this.setState({
+      folders: [...this.state.folders, folderName],
+    });
+  };
+
+  handleAddNote = (note) => {
+    this.setState({
+      notes: [...this.state.notes, note],
+    });
+  };
+
+  renderSidebar() {
     return (
       <>
-        {["/", "/folder/:folderId"].map((path) => (
-          <Route exact key={path} path={path} component={NoteListNav} />
-        ))}
-        <Route path="/note/:noteId" component={NotePageNav} />
-        <Route path="/add-folder" component={NotePageNav} />
-        <Route path="/add-note" component={NotePageNav} />
+        <Route exact path="/" component={SideBar} />
+
+        <Route path="/folder/:folderId" component={SideBar} />
+
+        <Route exact path="/note/:noteId" component={NotePageSideBar} />
+
+        <Route exact path="/add-folder" component={NotePageSideBar} />
+
+        <Route exact path="/add-note" component={NotePageSideBar} />
       </>
     );
   }
 
-  renderMainRoutes() {
+  renderMain() {
     return (
       <>
-        {["/", "/folder/:folderId"].map((path) => (
-          <Route exact key={path} path={path} component={NoteListMain} />
-        ))}
-        <Route path="/note/:noteId" component={NotePageMain} />
+        <Route path="/note/:noteId" component={Note} />
+
+        <Route path="/folder/:folderId" component={Main} />
+
+        <Route exact path="/" component={Main} />
+
+        <Route exact path="/add-folder" component={AddFolder} />
+
+        <Route exact path="/add-note" component={AddNote} />
       </>
     );
   }
 
   render() {
+    const value = {
+      notes: this.state.notes,
+      folders: this.state.folders,
+      deleteNote: this.handleDeleteNote,
+      addFolder: this.handleAddFolder,
+      addNote: this.handleAddNote,
+    };
+
     return (
-      <Context.Provider value={this.state}>
+      <Context.Provider value={value}>
         <div className="App">
-          <nav className="App_nav">{this.renderNavRoutes()}</nav>
-          <header className="App_header">
+          <nav className="App__sidebar">{this.renderSidebar()}</nav>
+          <header className="App__header">
             <h1>
               <Link to="/">Noteful</Link>
             </h1>
           </header>
-          <main className="App_main">{this.renderMainRoutes()}</main>
+          <main className="App__main">{this.renderMain()}</main>
         </div>
       </Context.Provider>
     );

@@ -1,8 +1,10 @@
 import React from "react";
 import Context from "../../Context";
-import { findNote, findFolder } from "../../note-helpers";
+import "../../App.css";
+import { findNote, findFolder } from "../../NoteHelper";
+import "./NotePageSideBar.css";
 
-class NotePageNav extends React.Component {
+class NotePageSideBar extends React.Component {
   static defaultProps = {
     history: {
       goBack: () => {},
@@ -18,13 +20,19 @@ class NotePageNav extends React.Component {
     const { noteId } = this.props.match.params;
     const note = findNote(notes, noteId) || {};
     const folder = findFolder(folders, note.folderId);
+
     return (
-      <div className="NotePageNav">
-        <button onClick={() => this.props.history.goBack()}>Back</button>
+      <div className="NotePageSideBar">
+        <button
+          className="NotePageNav_back-button"
+          onClick={() => this.props.history.goBack()}
+        >
+          Back
+        </button>
         {folder && <h3 className="NotePageNav_folder-name">{folder.name}</h3>}
       </div>
     );
   }
 }
 
-export default NotePageNav;
+export default NotePageSideBar;

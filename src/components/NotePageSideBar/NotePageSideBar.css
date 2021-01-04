@@ -1,0 +1,25 @@
+.NotePageNav_folder-title {
+  color: darkblue;
+  font-size: 56px;
+}
+
+.NotePageSideBar {
+  margin-top: 50px;
+  margin-left: 30px;
+}
+
+.NotePageNav_back-button {
+  color: white;
+  background-color: blueviolet;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  height: 30px;
+  margin-top: 50px;
+  font-size: 24px;
+}
+
+.NotePageNav_folder-name {
+  color: darkblue;
+  font-size: 48px;
+}
