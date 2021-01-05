@@ -96,6 +96,7 @@ class AddNote extends React.Component {
           <div className="flex-name">
             <label htmlFor="AddNote-name">Name: </label>
             <input
+              required
               type="text"
               className="addNote-name"
               id="addNote-name"
@@ -107,21 +108,23 @@ class AddNote extends React.Component {
           <div className="flex-content">
             <label htmlFor="AddNote-content">Content: </label>
             <input
+              required
               type="text"
               className="AddNote-content"
-              id="AddNote-content"
-              name="AddNote-content"
+              id="addNote-content"
+              name="addNote-content"
               onChange={(e) => this.updateContent(e.target.value)}
             />
           </div>
           <div>
             <label htmlFor="AddNote-folder">Folder: </label>
             <select
+              required
               id="AddNote-folder"
               name="AddNote-folder"
               onChange={(e) => this.updateFolder(e.target.value)}
             >
-              <option value={null}>Please select a folder</option>
+              <option value={""}>Please select a folder</option>
               {folders.map((folder) => (
                 <option key={folder.id} value={folder.id}>
                   {folder.name}
